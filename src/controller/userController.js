@@ -19,6 +19,8 @@ let postCRUD = async (req, res) => {
   console.log(message);
   return res.redirect("/user");
 };
+
+
 let updateUser = async (req, res) => {
   // console.log(req.query.id);
   // return res.sender("dskahjdhjs");
@@ -50,7 +52,6 @@ let deleteUser = async (req, res) => {
   } else {
     return res.send("Delete failed");
   }
-
 };
 
 module.exports = {

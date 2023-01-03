@@ -17,16 +17,15 @@ let CRUDService = async (data) => {
         gender: data.gender,
         roleId: data.roleId,
         // positionId: .,
-      })
-      resolve('OK! Create new user success!');
+      });
+      resolve("OK! Create new user success!");
     } catch (e) {
       reject(e);
     }
-  })
+  });
 
   let hashPasswordBcrypt = await hashUserPassword(data.password);
-  console.log(data),
-    console.log(hashPasswordBcrypt)
+  console.log(data), console.log(hashPasswordBcrypt);
 };
 
 let hashUserPassword = (password) => {
@@ -50,15 +49,15 @@ let getAllUser = () => {
     } catch (e) {
       reject(e);
     }
-  })
-}
+  });
+};
 let getUserById = (uId) => {
   return new Promise(async (resolve, reject) => {
     try {
       let user = await db.User.findOne({
         where: { id: uId },
         raw: true,
-      })
+      });
       if (user) {
         resolve(user);
       } else {
@@ -67,19 +66,21 @@ let getUserById = (uId) => {
     } catch (e) {
       reject(e);
     }
-  })
-}
+  });
+};
 let initUpdateUser = (data) => {
   return new Promise(async (resolve, reject) => {
     try {
       let user = await db.User.findOne({
-        where: { id: data.id }
-      })
+        where: { id: data.id },
+        raw: false,
+      });
+      let hashPasswordBcrypt = await hashUserPassword(data.password);
       if (user) {
         user.firstName = data.firstName;
         user.lastName = data.lastName;
         user.email = data.email;
-        user.password = data.password;
+        user.password = hashPasswordBcrypt;
         user.address = data.address;
         user.phoneNumber = data.phoneNumber;
         // user.image = data.image;
@@ -91,22 +92,22 @@ let initUpdateUser = (data) => {
         let lstUser = await db.User.findAll();
         resolve(lstUser);
         resolve();
-
       } else {
         resolve();
       }
     } catch (e) {
       console.log(e);
     }
-  })
-}
+  });
+};
 
 let deleteUserById = (uId) => {
   return new Promise(async (resolve, reject) => {
     try {
       let user = await db.User.findOne({
-        where: { id: uId }
-      })
+        where: { id: uId },
+        raw: false,
+      });
       if (user) {
         await user.destroy();
       } else {
@@ -115,12 +116,12 @@ let deleteUserById = (uId) => {
     } catch (e) {
       reject(e);
     }
-  })
-}
+  });
+};
 module.exports = {
   CRUDService,
   getAllUser,
   initUpdateUser,
   getUserById,
-  deleteUserById
+  deleteUserById,
 };
