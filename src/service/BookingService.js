@@ -1,4 +1,4 @@
-import db from "../models"; 111111111111111
+import db from "../models"; 
 
 let CreateNewBooking = () => {
 
