@@ -1,5 +1,5 @@
 import { json } from "express";
-import db from "../models/index";
+import db from "../../models/index";
 
 let getHomePage = async (req, res) => {
   // try {

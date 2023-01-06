@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import db from "../models";
+import db from "../../models";
 const salt = bcrypt.genSaltSync(10);
 
 let CRUDService = async (data) => {
@@ -23,7 +23,7 @@ let CRUDService = async (data) => {
       reject(e);
     }
   });
-
+  
   let hashPasswordBcrypt = await hashUserPassword(data.password);
   console.log(data), console.log(hashPasswordBcrypt);
 };
@@ -39,7 +39,7 @@ let hashUserPassword = (password) => {
   });
 };
 
-let getAllUser = () => {
+let getAll = () => {
   return new Promise(async (resolve, reject) => {
     try {
       let users = await db.User.findAll({
@@ -120,7 +120,7 @@ let deleteUserById = (uId) => {
 };
 module.exports = {
   CRUDService,
-  getAllUser,
+  getAll,
   initUpdateUser,
   getUserById,
   deleteUserById,

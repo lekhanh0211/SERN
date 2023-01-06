@@ -1,8 +1,8 @@
-import CRUDService from "../service/UserService";
+import CRUDService from "../../service/backend/UserService";
 
 let getAllUser = async (req, res) => {
 
-  let data = await CRUDService.getAllUser();
+  let data = await CRUDService.getAll();
   //console.log(data);
   return res.render("user.ejs", { dataUser: data });
 

@@ -25,7 +25,6 @@ let updateBooking = async (req,res) => {
         return res.send("User not found")
     }
 }
-
 let initUpdateBooking = async (req,res) => {
     let data = req.body;
     let allBooking = await bookingService.initUpdateBooking(data);

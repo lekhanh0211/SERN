@@ -1,6 +1,6 @@
 import express from "express";
-import homeController from "../controller/homeController";
-import userController from "../controller/userController";
+import homeController from "../controller/backend/homeController";
+import userController from "../controller/backend/userController";
 import bookingController from "../controller/bookingController";
 import accountController from "../controller/accountController";
 
@@ -27,6 +27,9 @@ let initWebRouter = (app) => {
 
   router.post("/api/login", accountController.handleLogin);
   router.get("/api/getAllUser", accountController.handleGetAllUser);
+  router.post("/api/postUser", accountController.handlePostUser);
+  router.put("/api/putUser", accountController.handlePutUser);
+  router.delete("/api/deleteUser", accountController.handleDeleteUser);
 
   return app.use("/", router);
 };
